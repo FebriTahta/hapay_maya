@@ -1,9 +1,10 @@
-<section>
-    <?php
-        include '../conf/config.php';
+<?php
+    include '../conf/config.php';
 
-        $data1 = mysqli_query($koneksi, query: "
-            select 
+    $tahun = isset($_GET['tahun']) ? $_GET['tahun'] : '';
+    
+    $query1= "
+        select 
             date_format(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%m') as `bulan_bhp_num`,
             date_format(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%b') as `bulan_bhp`,
             sum(besar_bhp) as `tertagih`,
@@ -64,82 +65,92 @@
             ) as `perolehan_denda`
         from db_client
         where awal_periode_bhp REGEXP '^[0-9]{2}/[0-9]{2}/[0-9]{4}$'
-        group by DATE_FORMAT(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%m') asc 
-        ");
+    ";
 
-        $data2 = mysqli_query($koneksi, query: "
-            select 
-                date_format(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%m') as `bulan_bhp_num`,
-                date_format(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%b') as `bulan_bhp`,
-                count(besar_bhp) as `terbit`,
-                count(
-                    case 
-                        when status_bayar = 'LUNAS' then 1
-                        else null
-                    end
-                ) as `spp_terbayar_lancar`,
-                count(
-                    case 
-                        when status_bayar = 'DENDA' then 1 
-                        else null
-                    end
-                ) as `spp_terbayar_lewat_batas`,
-                count(
-                    case 
-                        when status_bayar = 'TUNGGAK' then 1 
-                        else null
-                    end
-                ) as `spp_tertunggak`,
-                count(
-                    case 
-                        when status_bayar = 'BATAL' then 1 
-                        else null
-                    end
-                ) as `spp_dibatalkan`,
-                count(besar_bhp)
-                - count(
-                    case 
-                        when status_bayar = 'LUNAS' then 1
-                        else null
-                    end
-                )
-                - count(
-                    case 
-                        when status_bayar = 'DENDA' then 1 
-                        else null
-                    end
-                )
-                - count(
-                    case 
-                        when status_bayar = 'TUNGGAK' then 1 
-                        else null
-                    end
-                )
-                - count(
-                    case 
-                        when status_bayar = 'BATAL' then 1 
-                        else null
-                    end
-                ) as `spp_tunggu_dibayar`
-            from db_client
-            where awal_periode_bhp REGEXP '^[0-9]{2}/[0-9]{2}/[0-9]{4}$'
-            group by DATE_FORMAT(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%m') asc
-        ");
-        
-        // Simpan hasil query dalam array
-        $result1 = [];
-        $result2 = [];
+    $query2 = "
+        select 
+            date_format(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%m') as `bulan_bhp_num`,
+            date_format(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%b') as `bulan_bhp`,
+            count(besar_bhp) as `terbit`,
+            count(
+                case 
+                    when status_bayar = 'LUNAS' then 1
+                    else null
+                end
+            ) as `spp_terbayar_lancar`,
+            count(
+                case 
+                    when status_bayar = 'DENDA' then 1 
+                    else null
+                end
+            ) as `spp_terbayar_lewat_batas`,
+            count(
+                case 
+                    when status_bayar = 'TUNGGAK' then 1 
+                    else null
+                end
+            ) as `spp_tertunggak`,
+            count(
+                case 
+                    when status_bayar = 'BATAL' then 1 
+                    else null
+                end
+            ) as `spp_dibatalkan`,
+            count(besar_bhp)
+            - count(
+                case 
+                    when status_bayar = 'LUNAS' then 1
+                    else null
+                end
+            )
+            - count(
+                case 
+                    when status_bayar = 'DENDA' then 1 
+                    else null
+                end
+            )
+            - count(
+                case 
+                    when status_bayar = 'TUNGGAK' then 1 
+                    else null
+                end
+            )
+            - count(
+                case 
+                    when status_bayar = 'BATAL' then 1 
+                    else null
+                end
+            ) as `spp_tunggu_dibayar`
+        from db_client
+        where awal_periode_bhp REGEXP '^[0-9]{2}/[0-9]{2}/[0-9]{4}$'
+    ";
 
-        while ($row = mysqli_fetch_assoc($data1)) {
-            $result1[] = $row;
-        }
+    // tambahkan query untuk filter tahun jika ada
+    if (!empty($tahun)) {
+        $query1 .= "AND DATE_FORMAT(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%Y') = '$tahun'";
+        $query2 .= "AND DATE_FORMAT(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%Y') = '$tahun'";
+    }
+    // tambahkan query untuk group by bulan
+    $query1 .= " GROUP BY DATE_FORMAT(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%m') ASC";
+    $query2 .= " GROUP BY DATE_FORMAT(STR_TO_DATE(awal_periode_bhp, '%d/%m/%Y'), '%m') ASC";
 
-        while ($row = mysqli_fetch_assoc($data2)) {
-            $result2[] = $row;
-        }
+    $data1 = mysqli_query($koneksi, query: $query1);
+    $data2 = mysqli_query($koneksi, query: $query2);
+    
+    // Simpan hasil query dalam array
+    $result1 = [];
+    $result2 = [];
 
-        // Encode hasil dalam JSON
-        $jsonResult1 = json_encode($result1);
-        $jsonResult2 = json_encode($result2);
-    ?>
-</section>
+    while ($row = mysqli_fetch_assoc($data1)) {
+        $result1[] = $row;
+    }
+
+    while ($row = mysqli_fetch_assoc($data2)) {
+        $result2[] = $row;
+    }
+
+    // Encode hasil dalam JSON
+    $jsonResult1 = json_encode($result1);
+    $jsonResult2 = json_encode($result2);
+
+    echo json_encode(["data1" => $result1, "data2" => $result2]);

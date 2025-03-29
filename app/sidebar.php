@@ -22,12 +22,12 @@
       </div>
       <!-- Sidebar Menu -->
       <?php 
-      if($_SESSION['level']=='superadmin'){
-       include('menu/superadmin.php');
-      }
-      else{
-        include('menu/admin.php');
-      }
+        if($_SESSION['level']=='superadmin'){
+          include('menu/superadmin.php');
+        }
+        else{
+          include('menu/admin.php');
+        }
       ?>
       <!-- /.sidebar-menu -->
     </div>

@@ -1,12 +1,23 @@
 <?php 
   include('dashboard_chart.php');
-  // include('dashboard_data_table.php');
 ?>
 
 <section class="content">
   <div class="container-fluid">
     <div class="row" id="report-client">
       <!-- Left col -->
+      <div class="col-12">
+        <div class="filter">
+          <form id="filterForm">
+            <select name="tahun" class="form-control" style="width: 150px;" id="tahun">
+              <option value="">SEMUA TAHUN</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+            </select>
+          </form>
+        </div>
+      </div>
       <section class="col-lg-8 connectedSortable">
         <div class="card">
           <div class="card-header">
@@ -62,7 +73,7 @@
             </div>
           </div>
           <div class="card-body">
-            <canvas id="pieChart" width="300" height="300"></canvas>
+            <canvas id="pieChart" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
           </div>
         </div>
 
@@ -79,7 +90,7 @@
             </div>
           </div>
           <div class="card-body">
-            <canvas id="doughnutChart" width="300" height="300"></canvas>
+            <canvas id="doughnutChart" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
           </div>
         </div>
       </section>
