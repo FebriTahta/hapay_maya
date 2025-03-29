@@ -59,8 +59,8 @@
                                         <th class="text-nowrap">BHP TERBAYAR</th>
                                         <th class="text-nowrap">BHP DIBATALKAN</th>
                                         <th class="text-nowrap">DENDA TUNGGAKAN</th>
-                                        <!-- <th class="text-nowrap">KETERANGAN</th> -->
-                                        <!-- <th class="text-nowrap">ACTION</th> -->
+                                        <th class="text-nowrap">KETERANGAN</th>
+                                        <th class="text-nowrap">ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -98,8 +98,8 @@
                                             <td><?php echo "Rp " . number_format($d['bhp_terbayar'], 0, ',', '.'); ?></td>
                                             <td><?php echo "Rp " . number_format($d['bhp_dibatalkan'], 0, ',', '.'); ?></td>
                                             <td><?php echo "Rp " . number_format($d['denda_tunggakan'], 0, ',', '.'); ?></td>
-                                            <!-- <td><?php echo htmlspecialchars($d['keterangan']); ?></td> -->
-                                            <!-- <td>
+                                            <td><?php echo htmlspecialchars($d['keterangan']); ?></td>
+                                            <td>
                                                 <a href="view_data_client.php?id=<?php echo $d['id']; ?>" class="btn btn-primary btn-sm">
                                                     <i class="fas fa-eye"></i> View
                                                 </a>
@@ -113,8 +113,7 @@
                                                 <a href="delete.php?id=<?php echo $d['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                                     <i class="fas fa-trash"></i> Delete
                                                 </a>
-                                            </td> -->
-
+                                            </td>
                                         </tr>
                                     <?php
                                     }
@@ -146,14 +145,6 @@
                     <!-- Wilayah -->
                     <label for="wilayah">Wilayah:</label>
                     <input type="text" name="wilayah" id="wilayah" class="form-control" readonly>
-
-                    <!-- Bulan
-                    <label for="bulan">Bulan:</label>
-                    <input type="text" name="bulan" id="bulan" class="form-control" readonly> -->
-
-                    <!-- No -->
-                    <!-- <label for="no">No:</label>
-                    <input type="text" name="no" id="no" class="form-control" readonly> -->
 
                     <!-- Nama Client -->
                     <label for="nama_client">Nama Client:</label>
@@ -340,17 +331,6 @@
                         });
                     </script>
 
-                    <!-- <script>
-                document.getElementById("terbit_spp").addEventListener("change", function() {
-                    let tanggalTerbit = new Date(this.value);
-                    if (!isNaN(tanggalTerbit.getTime())) {
-                        tanggalTerbit.setDate(tanggalTerbit.getDate() + 60); // Tambah 60 hari
-                        let batasBayar = tanggalTerbit.toISOString().split("T")[0]; // Format YYYY-MM-DD
-                        document.getElementById("batas_bayar").value = batasBayar;
-                    }
-                });
-                </script> -->
-                    
                     <!-- Batas Bayar (Otomatis Terisi) -->
                     <label for="batas_bayar">Batas Bayar:</label>
                     <input type="date" name="batas_bayar" id="batas_bayar" class="form-control" readonly>
@@ -359,13 +339,6 @@
                     <label for="awal_periode_bhp">Awal Periode BHP:</label>
                     <!-- <input type="text" name="awal_periode_bhp" id="awal_periode_bhp" class="form-control" readonly> -->
                     <input type="date" name="awal_periode_bhp" id="awal_periode_bhp" class="form-control">
-
-                    <!-- Potensi BHP -->
-                    <!-- <label for="potensi_bhp">Potensi BHP:</label>
-                    <input type="number" step="0.0000001" name="potensi_bhp" id="potensi_bhp" class="form-control"> -->
-
-                    <!-- Besar BHP (Otomatis Terisi) -->
-                    <!-- <label for="potensi_bhp">Potensi BHP:</label> -->
 
                     <label for="besar_bhp">Besar BHP:</label>
                     <input type="number" step="0.0000001" name="potensi_bhp" id="potensi_bhp" class="form-control">
@@ -386,14 +359,6 @@
                         }
                     });
                     </script>
-
-                    <!-- <label for="potensi_bhp">Potensi BHP:</label>
-                    <input type="number" step="0.01" name="potensi_bhp" id="potensi_bhp" class="form-control"> -->
-
-                    <!-- Besar BHP -->
-                    <!-- <label for="besar_bhp">Besar BHP:</label>
-                    <input type="text" name="besar_bhp" id="besar_bhp" class="form-control" readonly> -->
-                    <!-- <input type="number" step="0.01" name="besar_bhp" id="besar_bhp" class="form-control"> -->
 
                     <!-- Tahun Periode -->
                     <label for="tahun_periode">Tahun Periode:</label>
@@ -428,8 +393,6 @@
                     });
                     </script>
 
-
-
                     <!-- Status Bayar -->
                     <label for="status_bayar">Status Bayar:</label>
                     <select name="status_bayar" id="status_bayar" class="form-control status-dropdown" onchange="ubahWarna()">
@@ -447,9 +410,6 @@
                         <option value="VALID" class="lunas">VALID</option>
                         <option value="BATAL" class="batal">BATAL</option>
                     </select>
-
-                    <!-- <input type="text" name="status_isr" id="status_isr" class="form-control"> -->
-
                     <!-- Tanggal Pembayaran -->
                     <label for="tgl_pembayaran">Tanggal Pembayaran:</label>
                     <input type="date" name="tgl_pembayaran" id="tgl_pembayaran" class="form-control">
@@ -475,95 +435,76 @@
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary" onclick="console.log('Form dikirim');">Submit</button>
 
-                            <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
                         </div>
                     </form>
-
-                    <!-- <button type="submit" name="submit">Simpan</button> -->
-                
-
-                
-
-                
-
-                    <!-- <label for="batas_bayar">Batas Bayar:</label>
-                    <input type="date" name="batas_bayar" id="batas_bayar" class="form-control"> -->
                     <script>
-                        document.getElementById("nama_client").addEventListener("change", function() {
-                            let clientId = this.value;
-                            let formClientBaru = document.getElementById("form_client_baru");
-                            let inputFields = ["wilayah", "alamat_client", "client_id", "app_id", "no_simf", "id_invoice", "no_spp", "service", "besar_bhp"];
+                            document.getElementById("nama_client").addEventListener("change", function() {
+                                let clientId = this.value;
+                                let formClientBaru = document.getElementById("form_client_baru");
+                                let inputFields = ["wilayah", "alamat_client", "client_id", "app_id", "no_simf", "id_invoice", "no_spp", "service", "besar_bhp"];
 
-                            if (clientId !== "" && clientId !== "tambah_baru") {
-                                fetch("get_client_data.php?client_id=" + clientId)
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        document.getElementById("wilayah").value = data.wilayah || "";
-                                        document.getElementById("alamat_client").value = data.alamat_client || "";
-                                        document.getElementById("client_id").value = data.client_id || "";
-                                        document.getElementById("app_id").value = data.app_id || "";
-                                        document.getElementById("no_simf").value = data.no_simf || "";
-                                        document.getElementById("id_invoice").value = data.id_invoice || "";
-                                        document.getElementById("no_spp").value = data.no_spp || "";
-                                        document.getElementById("service").value = data.service || "";
-                                        document.getElementById("besar_bhp").value = data.besar_bhp || "";
+                                if (clientId !== "" && clientId !== "tambah_baru") {
+                                    fetch("get_client_data.php?client_id=" + clientId)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            document.getElementById("wilayah").value = data.wilayah || "";
+                                            document.getElementById("alamat_client").value = data.alamat_client || "";
+                                            document.getElementById("client_id").value = data.client_id || "";
+                                            document.getElementById("app_id").value = data.app_id || "";
+                                            document.getElementById("no_simf").value = data.no_simf || "";
+                                            document.getElementById("id_invoice").value = data.id_invoice || "";
+                                            document.getElementById("no_spp").value = data.no_spp || "";
+                                            document.getElementById("service").value = data.service || "";
+                                            document.getElementById("besar_bhp").value = data.besar_bhp || "";
 
-                                        // Set input readonly jika memilih dari database
-                                        inputFields.forEach(id => {
-                                            document.getElementById(id).readOnly = true;
+                                            // Set input readonly jika memilih dari database
+                                            inputFields.forEach(id => {
+                                                document.getElementById(id).readOnly = true;
+                                            });
+
+                                            // Sembunyikan form tambah client baru
+                                            formClientBaru.style.display = "none";
+                                        })
+                                        .catch(error => console.error("Error fetching data:", error));
+                                } else if (clientId === "tambah_baru") {
+                                    // Tampilkan form tambah client baru
+                                    formClientBaru.style.display = "block";
+
+                                    // Kosongkan semua field yang perlu diisi
+                                    inputFields.forEach(id => {
+                                        document.getElementById(id).value = "";
+                                        document.getElementById(id).readOnly = false;
+                                    });
+                                } else {
+                                    // Sembunyikan form tambah client baru jika tidak ada pilihan
+                                    formClientBaru.style.display = "none";
+                                }
+                            });
+                            $(document).ready(function(){
+                                $("#nama_client").change(function(){
+                                    var client_id = $(this).val();
+                                    if(client_id !== ""){
+                                        $.ajax({
+                                            url: "get_client_data.php",
+                                            type: "POST",
+                                            data: {client_id: client_id},
+                                            dataType: "json",
+                                            success: function(data){
+                                                if(data){
+                                                    $("#alamat_client").val(data.alamat_client);
+                                                    $("#client_id").val(data.client_id);
+                                                    $("#app_id").val(data.app_id);
+                                                }
+                                            }
                                         });
-
-                                        // Sembunyikan form tambah client baru
-                                        formClientBaru.style.display = "none";
-                                    })
-                                    .catch(error => console.error("Error fetching data:", error));
-                            } else if (clientId === "tambah_baru") {
-                                // Tampilkan form tambah client baru
-                                formClientBaru.style.display = "block";
-
-                                // Kosongkan semua field yang perlu diisi
-                                inputFields.forEach(id => {
-                                    document.getElementById(id).value = "";
-                                    document.getElementById(id).readOnly = false;
+                                    } else {
+                                        $("#alamat_client").val("");
+                                        $("#client_id").val("");
+                                        $("#app_id").val("");
+                                    }
                                 });
-                            } else {
-                                // Sembunyikan form tambah client baru jika tidak ada pilihan
-                                formClientBaru.style.display = "none";
-                            }
-                        });
+                            });
                         </script>
-                    
-
-                    
-               </form>    
-                        
-                        <script>
-$(document).ready(function(){
-    $("#nama_client").change(function(){
-        var client_id = $(this).val();
-        if(client_id !== ""){
-            $.ajax({
-                url: "get_client_data.php",
-                type: "POST",
-                data: {client_id: client_id},
-                dataType: "json",
-                success: function(data){
-                    if(data){
-                        $("#alamat_client").val(data.alamat_client);
-                        $("#client_id").val(data.client_id);
-                        $("#app_id").val(data.app_id);
-                    }
-                }
-            });
-        } else {
-            $("#alamat_client").val("");
-            $("#client_id").val("");
-            $("#app_id").val("");
-        }
-    });
-});
-</script>
-
                     </div>
                 </form> <!-- Pastikan form ditutup di sini -->
             </div> <!-- modal-body -->
