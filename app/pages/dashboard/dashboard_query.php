@@ -1,6 +1,5 @@
 <?php
-    include '../conf/config.php';
-
+    include('app/../../../../conf/config.php');
     $tahun = isset($_GET['tahun']) ? $_GET['tahun'] : '';
     
     $query1= "
@@ -137,6 +136,7 @@
     $data1 = mysqli_query($koneksi, query: $query1);
     $data2 = mysqli_query($koneksi, query: $query2);
     
+    
     // Simpan hasil query dalam array
     $result1 = [];
     $result2 = [];
@@ -152,5 +152,6 @@
     // Encode hasil dalam JSON
     $jsonResult1 = json_encode($result1);
     $jsonResult2 = json_encode($result2);
+   
 
     echo json_encode(["data1" => $result1, "data2" => $result2]);

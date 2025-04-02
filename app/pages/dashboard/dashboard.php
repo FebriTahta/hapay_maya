@@ -1,5 +1,5 @@
 <?php 
-  include('dashboard_chart.php');
+  include('app/../pages/dashboard/dashboard_chart.php');
 ?>
 
 <section class="content">
@@ -9,12 +9,7 @@
       <div class="col-12">
         <div class="filter">
           <form id="filterForm">
-            <select name="tahun" class="form-control" style="width: 150px;" id="tahun">
-              <option value="">SEMUA TAHUN</option>
-              <option value="2023">2023</option>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-            </select>
+            <select name="tahun" class="form-control" style="width: 150px;" id="tahun"></select>
           </form>
         </div>
       </div>

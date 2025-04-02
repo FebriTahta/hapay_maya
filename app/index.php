@@ -39,7 +39,10 @@ include('header.php');?>
     <?php
     if (isset($_GET['page'])){
       if ($_GET['page']=='dashboard'){
-        include('dashboard.php');
+        include('app/../pages/dashboard/dashboard.php');
+      }
+      else if($_GET['page']=='client'){
+        include('app/../pages/client/client.php');
       }
       else if($_GET['page']=='data-pembayaran'){
         include('data_pembayaran.php');

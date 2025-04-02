@@ -2,7 +2,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         function loadChart(tahun = '') {
             $.ajax({
-                url: "dashboard_query.php",
+                url: "app/../pages/dashboard/dashboard_query.php",
                 type: "GET",
                 data: { tahun: tahun },
                 dataType: "json",

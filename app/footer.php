@@ -53,12 +53,40 @@
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<?php
+
+  include('app/../global/ajax_global.php');
+
+  if (isset($_GET['page']) && $_GET['page'] == 'dashboard') {
+    
+    # code...
+    include('app/../pages/dashboard/dashboard_data_table.php');
+
+  }elseif(isset($_GET['page']) && $_GET['page'] == 'client'){
+    
+    # code...
+    include('app/../pages/client/client_ajax.php');
+
+  }
+?>
+
 <?php 
-include('dashboard_data_table.php');
 ?>
 <script>
   $(function () {
     $("#example1").DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": false,
+      "autoWidth": false,
+      "responsive": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+    $("#data_client").DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": false,

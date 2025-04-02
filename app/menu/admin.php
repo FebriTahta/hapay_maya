@@ -26,7 +26,7 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="index.php?page=data" class="nav-link <?= ($page == 'data') ? 'active' : ''; ?>">
+          <a href="index.php?page=client" class="nav-link <?= ($page == 'client') ? 'active' : ''; ?>">
             <i class="far fa-circle nav-icon"></i>
             <p>Data Client</p>
           </a>
@@ -37,12 +37,6 @@
             <p>Data Tagihan</p>
           </a>
         </li>
-        <!-- <li class="nav-item">
-          <a href="index.php?page=data-yy" class="nav-link <?= ($page == 'data-yy') ? 'active' : ''; ?>">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Dashboard v3</p>
-          </a>
-        </li> -->
       </ul>
     </li>
 
