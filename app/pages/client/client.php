@@ -1,10 +1,16 @@
 <section>
     <div class="content" style="padding-left: 1%; padding-right: 1%;">
         <div id="info" class="info row text-uppercase"></div>
-        <div class="filter">
-            <form id="filterForm">
-                <select name="tahun" class="form-control" style="width: 150px;" id="tahun"></select>
-            </form>
+        <div class="filter mb-2" style="margin-left: 6px;">
+            <div class="row">
+                <form id="filterForm col-4" style="margin-right: 10px;">
+                    <select name="tahun" class="form-control" style="width: 150px;" id="tahun"></select>
+                </form>
+
+                <form id="filterFormStatus col-4">
+                    <select name="status" class="form-control" style="width: 150px;" id="status"></select>
+                </form>
+            </div>
         </div>
         <div class="card">
             <div class="card-header">
@@ -21,13 +27,65 @@
                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="data_client" class="table table-bordered table-striped dataTable dtr-inline collapsed" role="grid" aria-describedby="example1_info">
-                                <thead>
-                                <tr role="row"><th class="sorting sorting_asc" tabindex="0" aria-controls="data_client" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Rendering engine</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Browser</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Platform(s)</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Engine version</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="display: none;">CSS grade</th></tr>
+                            <table id="data_table_client" class="table table-bordered table-striped dataTable dtr-inline collapsed" role="grid" aria-describedby="example1_info">
+                                <thead class="text-uppercase text-nowrap">
+                                    <tr role="row">
+                                        <th>No</th>
+                                        <th>Wilayah</th>
+                                        <th>Client</th>
+                                        <th>Alamat</th>
+                                        <th>Client Id</th>
+                                        <th>App Id</th>
+                                        <th>No Simf</th>
+                                        <th>Id Invoice</th>
+                                        <th>No Spp</th>
+                                        <th>Service</th>
+                                        <th>Terbit Spp</th>
+                                        <th>Batas Bayar</th>
+                                        <th>Awal Periode BHP</th>
+                                        <th>Potensi BHP</th>
+                                        <th>Besar BHP</th>
+                                        <th>Tahun Periode</th>
+                                        <th>Status Bayar</th>
+                                        <th>Status Isr</th>
+                                        <th>Tgl Pembayaran</th>
+                                        <th>Bhp Terbayar</th>
+                                        <th>Bhp Dibatalkan</th>
+                                        <th>Denda Tunggakan</th>
+                                        <th>Keterangan</th>
+                                        <th>Action</th>
+                                    </tr>
                                 </thead>
-                  
-                                <tfoot>
-                                <tr><th rowspan="1" colspan="1">Rendering engine</th><th rowspan="1" colspan="1">Browser</th><th rowspan="1" colspan="1">Platform(s)</th><th rowspan="1" colspan="1">Engine version</th><th rowspan="1" colspan="1" style="display: none;">CSS grade</th></tr>
+
+                                <tbody></tbody>
+
+                                <tfoot class="text-uppercase text-nowrap">
+                                    <tr role="row">
+                                    <th>No</th>
+                                        <th>Wilayah</th>
+                                        <th>Client</th>
+                                        <th>Alamat</th>
+                                        <th>Client Id</th>
+                                        <th>App Id</th>
+                                        <th>No Simf</th>
+                                        <th>Id Invoice</th>
+                                        <th>No Spp</th>
+                                        <th>Service</th>
+                                        <th>Terbit Spp</th>
+                                        <th>Batas Bayar</th>
+                                        <th>Awal Periode BHP</th>
+                                        <th>Potensi BHP</th>
+                                        <th>Besar BHP</th>
+                                        <th>Tahun Periode</th>
+                                        <th>Status Bayar</th>
+                                        <th>Status Isr</th>
+                                        <th>Tgl Pembayaran</th>
+                                        <th>Bhp Terbayar</th>
+                                        <th>Bhp Dibatalkan</th>
+                                        <th>Denda Tunggakan</th>
+                                        <th>Keterangan</th>
+                                        <th>Action</th>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>

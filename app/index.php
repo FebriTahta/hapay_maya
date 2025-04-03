@@ -55,7 +55,7 @@ include('header.php');?>
       }
     }
     else{
-      include('dashboard.php');
+      include('app/../pages/dashboard/dashboard.php');
     }?> 
     <!-- /.content --> 
   </div>

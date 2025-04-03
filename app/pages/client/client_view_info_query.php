@@ -11,7 +11,7 @@
         die(json_encode(["error" => "Database connection failed: " . mysqli_connect_error()]));
     }
 
-    // Query 
+    // Query Info
     $query = "
         SELECT 
             dc.status_bayar AS status_bayar,
@@ -32,13 +32,16 @@
     try {
         if (!empty($params)) {
             $stmt = $koneksi->prepare($query);
+            
             if (!$stmt) {
                 throw new Exception("Query preparation failed: " . $koneksi->error);
             }
 
             $stmt->bind_param("s", ...$params);
             $stmt->execute();
+
             $result = $stmt->get_result();
+
         } else {
             $result = $koneksi->query($query);
             if (!$result) {
@@ -46,19 +49,24 @@
             }
         }
 
-        $dataClient = $result->fetch_all(MYSQLI_ASSOC);
+        $infoDataClient = $result->fetch_all(MYSQLI_ASSOC);
 
-        if (empty($dataClient)) {
-            $dataClient = ["message" => "No data found"];
+        if (empty($infoDataClient)) {
+            $infoDataClient = ["message" => "No data found"];
         }
 
         header('Content-Type: application/json');
-        echo json_encode(["data_client" => $dataClient]);
+        echo json_encode([
+            "info_data_client" => $infoDataClient,
+        ]);
 
         if (!empty($params)) {
             $stmt->close();
         }
         $koneksi->close();
+
     } catch (Exception $e) {
         echo json_encode(["error" => $e->getMessage()]);
     }
+
+    

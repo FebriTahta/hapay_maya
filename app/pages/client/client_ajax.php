@@ -1,30 +1,45 @@
 <script>
     function loadStatus(tahun='') {
         $.ajax({
-            url: "app/../pages/client/client_query.php",
+            url: "app/../pages/client/client_view_info_query.php",
             type: 'GET',
             data: { tahun: tahun },
             dataType: 'json',
             success: function(response) {
+
+                const infoDataClient = response.info_data_client;
+                const tableDataClient = response.table_data_client;
+
                 // Pastikan response.data3 ada dan berupa array
-                if (!response || !Array.isArray(response.data_client)) {
-                    console.error("Response data1 is not an array:", response);
+                if (!response || !Array.isArray(infoDataClient)) {
+                    console.error("Response infoDataClient is not an array:", response);
                     return; // Hentikan eksekusi jika tidak sesuai format
                 }
 
-                const dataClient = response.data_client;
+                // if (!response || !Array.isArray(tableDataClient)) {
+                //     console.error("Response tableDataClient is not an array:", response);
+                //     return; // Hentikan eksekusi jika tidak sesuai format
+                // }
+
                 const arr = [];
-                const arr_val = [];
-                
+                const arr_val = [];                
             
-                dataClient.forEach(function(item) {
+                infoDataClient.forEach(function(item) {
                     arr.push(item.status_bayar); // Atau item.amount_status, sesuai dengan yang Anda butuhkan
                     arr_val.push(item.amount_status);
                 });
                 
-                $('#info').empty(); // Kosongkan dulu konten jika perlu
+                $('#status').html('<option value="">SEMUA STATUS</option>');
+
+                
+                $('#info').empty();
+
                 arr.forEach(function(status, index) {
                     
+                    if (status) {
+                        $('#status').append('<option value="'+ status +'">'+ status +'</option>');
+                    }
+
                     let display_icon = '';
                     let background_icon = '';
 
@@ -65,14 +80,83 @@
         });
     }
 
+    function loadDataTableClient(tahun = '', status = '') {
+        $.ajax({
+            url: "app/../pages/client/client_data_table_query.php",
+            type: 'GET',
+            data: { 
+                tahun: tahun,
+                status: status
+            },
+            dataType: 'json',
+            success: function(response) {
+                const data = response.data_table_client;
+                console.log(data);
+                
+                // Hancurkan DataTable jika sudah ada
+                if ($.fn.DataTable.isDataTable('#data_table_client')) {
+                    $('#data_table_client').DataTable().destroy();
+                }
+
+                // Inisialisasi ulang DataTable dengan data baru
+                $('#data_table_client').DataTable({
+                    "processing": true,
+                    "serverSide": false,
+                    "data": data, // Pastikan data dimasukkan di sini
+                    "columns": [
+                        { "data": "id" },
+                        { "data": "wilayah" },
+                        { "data": "nama_client" },
+                        { "data": "alamat_client" },
+                        { "data": "client_id" },
+                        { "data": "app_id" },
+                        { "data": "no_simf" },
+                        { "data": "id_invoice" },
+                        { "data": "no_spp" },
+                        { "data": "service" },
+                        { "data": "terbit_spp" },
+                        { "data": "batas_bayar" },
+                        { "data": "awal_periode_bhp" },
+                        { "data": "potensi_bhp" },
+                        { "data": "besar_bhp" },
+                        { "data": "tahun_periode" },
+                        { "data": "status_bayar" },
+                        { "data": "status_isr" },
+                        { "data": "tgl_pembayaran" },
+                        { "data": "bhp_terbayar" },
+                        { "data": "bhp_dibatalkan" },
+                        { "data": "denda_tunggakan" },
+                        { "data": "keterangan" },
+                        { "data": "action" }
+                    ]
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error mengambil data:", error);
+            }
+        });
+    }
+
+
+    
+
     // load data 
     document.addEventListener("DOMContentLoaded", function() {
         // function list
         loadStatus();
+        loadDataTableClient();
+
+        let tahunFiltered , statusFiltered;
 
         document.getElementById("tahun").addEventListener("change", function() {
-            console.log("Filter tahun diubah:", this.value); // Debugging
-            loadStatus(this.value); // Load ulang grafik berdasarkan tahun
+            tahunFiltered = this.value
+            loadStatus(tahunFiltered); // Load ulang grafik berdasarkan tahun
+            loadDataTableClient(tahunFiltered);
+        });
+
+        document.getElementById("status").addEventListener("change", function() {
+            statusFiltered = this.value;
+            loadDataTableClient(tahunFiltered,statusFiltered);
         });
     });
 </script>
