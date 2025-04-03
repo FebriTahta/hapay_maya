@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="row" id="report-client">
       <!-- Left col -->
-      <div class="col-12">
+      <div class="col-12 mb-2">
         <div class="filter">
           <form id="filterForm">
             <select name="tahun" class="form-control" style="width: 150px;" id="tahun"></select>
