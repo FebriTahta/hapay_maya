@@ -19,7 +19,7 @@
                         DETAIL TABLE DATA CLIENT
                     </div>
                     <div class="col-6 text-right">
-                        <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
+                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal_add_client"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -95,3 +95,7 @@
         </div>
     </div>
 </section>
+
+<?php
+    include('client_modal_add.php');
+?>
