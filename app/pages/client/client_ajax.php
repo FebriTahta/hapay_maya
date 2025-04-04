@@ -91,7 +91,7 @@
             dataType: 'json',
             success: function(response) {
                 const data = response.data_table_client;
-                console.log(data);
+                // console.log(data);
                 
                 // Hancurkan DataTable jika sudah ada
                 if ($.fn.DataTable.isDataTable('#data_table_client')) {
@@ -137,7 +137,32 @@
         });
     }
 
+    $('#formInsertClient').submit(function(e) {
+        e.preventDefault();
 
+        $.ajax({
+            type: "POST",
+            url: "app/../pages/client/client_insert_query.php",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function(response) {
+                if (response.success) {
+                    // alert("Data berhasil disimpan!");
+                    toastr.success(response.message);
+                    $('#modal_add_client').modal('hide');
+                    loadDataTableClient(); // Reload DataTable setelah menyimpan data
+                    loadStatus(); // reload info status
+                } else {
+                    // alert("Gagal menyimpan data: " + response.error);
+                    toastr.warning(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error:", error);
+                toastr.error(error);
+            }
+        });
+    });
     
 
     // load data 
