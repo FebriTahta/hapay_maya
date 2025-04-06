@@ -55,9 +55,16 @@
             }
         }
 
-        // contoh validasi wajib isi untuk nama_client dan client_id
-        if (empty($_POST['nama_client'])) {
-            die(json_encode(["success" => false, "error" => "Field 'nama_client' wajib diisi."]));
+        if ($_POST['nama_client'] == 'tambah_baru') {
+            $client = $_POST['nama_client_baru'] ?? null;
+            if (empty($client)) {
+                die(json_encode(["success" => false, "error" => "Field 'nama_client' wajib diisi."]));
+            }
+        }else {
+            $client = $_POST['nama_client_ini'] ?? null;
+            if (empty($client)) {
+                die(json_encode(["success" => false, "error" => "Field 'nama_client' wajib diisi."]));
+            }
         }
 
         if (empty($_POST['client_id'])) {
@@ -85,7 +92,7 @@
             $_POST['wilayah'],
             $new_id,  // ID baru hasil dari MAX(id) + 1
             $new_id,  // ID baru hasil dari MAX(id) + 1
-            $_POST['nama_client_ini'], //$_POST['nama_client'],
+            $client,  // $_POST['nama_client'] $_POST['nama_client_ini'] $_POST['nama_client_baru'],
             $_POST['alamat_client'],
             $_POST['client_id'], 
             $_POST['app_id'], 
