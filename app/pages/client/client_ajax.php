@@ -192,6 +192,41 @@
         });
     });
     
+    $(document).on('click', '.delete-btn', function() {
+        let id = $(this).data('id');
+
+        Swal.fire({
+            title: 'Yakin hapus data ini?',
+            text: "Data yang dihapus tidak bisa dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "app/../pages/client/client_delete_query.php",
+                    type: "POST",
+                    data: { id: id },
+                    dataType: "json", // WAJIB: biar respon otomatis diparse jadi objek
+                    success: function(response) {
+                        
+                        if (response.success == 201) {
+                            Swal.fire('Terhapus!', 'Data berhasil dihapus.', 'success');
+                            loadDataTableClient();
+                            loadStatus();
+                        } else {
+                            Swal.fire('Gagal!', response.message || 'Terjadi kesalahan.', 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire('Gagal!', 'AJAX error: ' + error, 'error');
+                    }
+                });
+            }
+        });
+    });
 
     // load data 
     document.addEventListener("DOMContentLoaded", function() {
