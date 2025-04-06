@@ -163,6 +163,34 @@
             }
         });
     });
+
+    $('#formEditClient').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "app/../pages/client/client_edit_query.php",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function(response) {
+                if (response.success) {
+                    // alert("Data berhasil disimpan!");
+                    toastr.success(response.message);
+                     // Redirect ke halaman client setelah delay 1.5 detik
+                    setTimeout(function() {
+                        window.location.href = "index.php?page=client";
+                    }, 1500);
+                    
+                } else {
+                    // alert("Gagal menyimpan data: " + response.error);
+                    toastr.warning(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error:", error);
+                toastr.error(error);
+            }
+        });
+    });
     
 
     // load data 

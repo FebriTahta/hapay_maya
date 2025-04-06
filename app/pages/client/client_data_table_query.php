@@ -62,9 +62,9 @@ try {
     // Tambahkan tombol action ke setiap baris
     foreach ($dataTableClient as &$row) {
         $row['action'] = '
-            <button class="edit-btn btn btn-sm btn-primary" style="width:100px; margin-bottom:5px" data-id="'.$row['id'].'"> 
+            <a href="index.php?page=client-edit&id='.$row['id'].'" class="edit-btn btn btn-sm btn-primary" style="width:100px; margin-bottom:5px" data-id="'.$row['id'].'"> 
                 <i class="fa fa-edit"></i> Edit
-            </button>
+            </a>
             <button class="edit-btn btn btn-sm btn-danger" style="width:100px; margin-bottom:5px" data-id="'.$row['id'].'">
                 <i class="fa fa-trash"></i> Delete
             </button>

@@ -100,12 +100,12 @@
                                             <td><?php echo "Rp " . number_format($d['denda_tunggakan'], 0, ',', '.'); ?></td>
                                             <td><?php echo htmlspecialchars($d['keterangan']); ?></td>
                                             <td>
-                                                <a href="view_data_client.php?id=<?php echo $d['id']; ?>" class="btn btn-primary btn-sm">
+                                                <a href="view.php?id=<?php echo $d['id']; ?>" class="btn btn-primary btn-sm">
                                                     <i class="fas fa-eye"></i> View
                                                 </a>
 
                                                 
-                                                <a href="edit_data_client.php?id=<?php echo $d['id']; ?>" class="btn btn-warning btn-sm">
+                                                <a href="edit.php?id=<?php echo $d['id']; ?>" class="btn btn-warning btn-sm">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
 

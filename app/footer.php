@@ -65,7 +65,7 @@
     # code...
     include('app/../pages/dashboard/dashboard_data_table.php');
 
-  }elseif(isset($_GET['page']) && $_GET['page'] == 'client'){
+  }elseif(isset($_GET['page']) && $_GET['page'] == 'client' || $_GET['page'] == 'client-edit'){
     
     # code...
     include('app/../pages/client/client_ajax.php');

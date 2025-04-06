@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php 
-session_start();
-if (!isset($_SESSION['nama'])) {
-    header('Location: ../index.php?session=expired');
-}
-include('header.php'); 
-include('../conf/config.php'); 
+    session_start();
+    if (!isset($_SESSION['nama'])) {
+        header('Location: ../index.php?session=expired');
+    }
+    include('header.php'); 
+    include('../conf/config.php'); 
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
