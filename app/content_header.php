@@ -9,6 +9,9 @@
           }elseif(isset($_GET['page']) && $_GET['page'] == 'client'){
             echo '<h1 class="m-0">DATA CLIENT</h1>';  
           }
+          elseif(isset($_GET['page']) && $_GET['page'] == 'status-tagihan'){
+            echo '<h1 class="m-0">DATA TAGIHAN CLIENT</h1>';  
+          }
         ?>
       </div><!-- /.col -->
       <div class="col-sm-6">
@@ -24,6 +27,11 @@
               echo '
                 <li class="breadcrumb-item active">Data Client</li>
               ';  
+            }
+            elseif(isset($_GET['page']) && $_GET['page'] == 'status-tagihan'){
+              echo '
+              <li class="breadcrumb-item active">Data Tagihan Client</li>
+            ';  
             }
           ?>
         </ol>

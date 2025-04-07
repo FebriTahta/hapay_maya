@@ -79,7 +79,7 @@ try {
         );
 
         $row['akses_status_bayar'] = '
-            <a href="index.php?page=status-tagihan&client_id='.$row['client_id'].'"
+            <a href="index.php?page=status-tagihan&client_id='.$row['client_id'].'&status_bayar='.$row['status_bayar'].'&id='.$row['id'].'"
             class="btn btn-sm '.$class.'"
                 style="width:100px; margin-bottom:5px"> 
                 '.$row['status_bayar'].'

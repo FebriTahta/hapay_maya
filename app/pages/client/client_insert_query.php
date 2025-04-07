@@ -9,6 +9,8 @@
         die(json_encode(["error" => "Database connection failed: " . mysqli_connect_error()]));
     }
 
+    
+
     $query = "
         insert into db_client (
             id,
