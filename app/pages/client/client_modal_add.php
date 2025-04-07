@@ -45,262 +45,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Wilayah -->
-                                <label for="wilayah">Wilayah:</label>
-                                <input type="text" name="wilayah" id="wilayah" class="form-control" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Alamat Client -->
-                                <label for="alamat_client">Alamat Client:</label>
-                                <textarea name="alamat_client" id="alamat_client" class="form-control" readonly></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Client ID -->
-                                <label for="client_id">Client ID:</label>
-                                <input type="text" name="client_id" id="client_id" class="form-control" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- App ID -->
-                                <label for="app_id">App ID:</label>
-                                <input type="number" name="app_id" id="app_id" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                 <!-- No Simf -->
-                                <label for="no_simf">No Simf:</label>
-                                <input type="text" name="no_simf" id="no_simf" class="form-control" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                 <!-- ID Invoice -->
-                                <label for="id_invoice">ID Invoice:</label>
-                                <input type="number" name="id_invoice" id="id_invoice" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- No SPP -->
-                                <label for="no_spp">No SPP:</label>
-                                <input type="number" name="no_spp" id="no_spp" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Service -->
-                                <label for="service">Service:</label>
-                                <!-- <input type="text" name="service" id="service" class="form-control" readonly> -->
-                                <select name="service" id="service" class="form-control status-dropdown" onchange="ubahWarna()">
-                                    <option value="" selected disabled>-- Pilih Service--</option>
-                                    <option value="BROADCAST" class="broadcast">Broadcast</option>
-                                    <option value="FIXED SERVICE" class="fixed service">Fixed Service</option>
-                                    <option value="LAND MOBILE (PRIVATE)" class="land mobile (private)">Land Mobile (Private)</option>
-                                    <option value="LAND MOBILE (PUBLIC)" class="land mobile (public)">Land Mobile (Public)</option>
-                                    <option value="SATELLITE" class="satelite">Satellite</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                 <!-- Batas Bayar (Otomatis Terisi) -->
-                                <label for="batas_bayar">Batas Bayar:</label>
-                                <input type="date" name="batas_bayar" id="batas_bayar" class="form-control" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Awal Periode BHP -->
-                                <label for="awal_periode_bhp">Awal Periode BHP:</label>
-                                <!-- <input type="text" name="awal_periode_bhp" id="awal_periode_bhp" class="form-control" readonly> -->
-                                <input type="date" name="awal_periode_bhp" id="awal_periode_bhp" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <label for="besar_bhp">Besar BHP:</label>
-                                <input type="number" step="0.0000001" name="besar_bhp" id="besar_bhp" class="form-control">
-                                <!-- <input type="text" name="besar_bhp" id="besar_bhp" class="form-control" readonly> -->
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                            <!-- Tanggal Terbit SPP -->
-                            <label for="terbit_spp">Terbit SPP:</label>
-                            <input type="date" name="terbit_spp" id="terbit_spp" class="form-control" required>
-                            <script>
-                                function hitungBatasBayar() {
-                                    let tanggalTerbitInput = document.getElementById("terbit_spp");
-                                    let batasBayarInput = document.getElementById("batas_bayar");
-                                    let namaClient = document.getElementById("nama_client").value;
-
-                                    if (!tanggalTerbitInput.value) {
-                                        batasBayarInput.value = ""; // Kosongkan batas bayar jika tanggal belum diisi
-                                        return;
-                                    }
-
-                                    let tanggalTerbit = new Date(tanggalTerbitInput.value);
-
-                                    if (!isNaN(tanggalTerbit.getTime())) {
-                                        let tambahanHari = (namaClient === "tambah_baru") ? 30 : 60; 
-                                        tanggalTerbit.setDate(tanggalTerbit.getDate() + tambahanHari);
-
-                                        batasBayarInput.value = tanggalTerbit.toISOString().split("T")[0]; 
-                                    }
-                                }
-
-                                document.getElementById("terbit_spp").addEventListener("change", hitungBatasBayar);
-
-                                document.getElementById("nama_client").addEventListener("change", function() {
-                                    document.getElementById("terbit_spp").value = "";  // Kosongkan Terbit SPP saat client berubah
-                                    document.getElementById("batas_bayar").value = ""; // Kosongkan Batas Bayar juga
-                                });
-                            </script>
-
-                            
-
-                            <script>
-                                document.getElementById("potensi_bhp").addEventListener("input", function() {
-                                    let potensiBhp = parseFloat(this.value); // Ambil nilai input sebagai angka
-
-                                    if (!isNaN(potensiBhp)) {
-                                        let formattedBhp = Number.isInteger(potensiBhp) 
-                                            ? potensiBhp.toString()  // Jika bilangan bulat, tampilkan tanpa desimal
-                                            : potensiBhp.toFixed(7).replace(/\.?0+$/, ""); // Jika ada desimal, hapus nol di belakang
-
-                                        document.getElementById("besar_bhp").value = formattedBhp.replace(".", ","); // Gunakan koma untuk desimal
-                                    } else {
-                                        document.getElementById("besar_bhp").value = 0; // Kosongkan jika input kosong
-                                    }
-                                });
-                            </script>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Tahun Periode -->
-                                <label for="tahun_periode">Tahun Periode:</label>
-                                <select id="tahun_periode" name="tahun_periode" class="form-control">
-                                    <option value="" selected disabled>-- Pilih Tahun --</option>
-                                </select>
-
-                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                <script>
-                                $(document).ready(function() {
-                                    let select = $('#tahun_periode');
-
-                                    // Bersihkan isi dropdown biar nggak duplikat
-                                    select.empty();
-
-                                    // Tambahkan opsi default
-                                    select.append('<option value="" selected disabled>-- Pilih Tahun --</option>');
-
-                                    // Tambahkan opsi tahun dengan warna
-                                    for (let i = 1; i <= 10; i++) {
-                                        let option = $('<option>', { value: i, text: i });
-
-                                        // Atur warna khusus untuk angka tertentu
-                                        if (i == 6) {
-                                            option.css('color', 'red'); // Warna merah untuk angka 6
-                                        } else if (i == 10) {
-                                            option.css({ 'color': 'yellow', 'background-color': 'black' }); // Warna kuning dengan latar hitam
-                                        }
-
-                                        select.append(option);
-                                    }
-                                });
-                                </script>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Status Bayar -->
-                                <label for="status_bayar">Status Bayar:</label>
-                                <select name="status_bayar" id="status_bayar" class="form-control status-dropdown" onchange="ubahWarna()">
-                                <option value="" selected disabled>-- Pilih Status Bayar--</option>    
-                                    <option value="LUNAS" class="lunas">LUNAS</option>
-                                    <option value="DENDA" class="denda">DENDA</option>
-                                    <option value="TUNGGAK" class="tunggak">TUNGGAK</option>
-                                    <option value="BATAL" class="batal">BATAL</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Status ISR -->
-                                <label for="status_isr">Status ISR:</label> <!-- ID & name diperbaiki -->
-                                <select name="status_isr" id="status_isr" class="form-control status-dropdown" onchange="ubahWarna()">
-                                    <option value="" selected disabled>-- Pilih Status ISR --</option>
-                                    <option value="VALID" class="lunas">VALID</option>
-                                    <option value="BATAL" class="batal">BATAL</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Tanggal Pembayaran -->
-                                <label for="tgl_pembayaran">Tanggal Pembayaran:</label>
-                                <input type="date" name="tgl_pembayaran" id="tgl_pembayaran" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- BHP Terbayar -->
-                                <label for="bhp_terbayar">BHP terbayar:</label>
-                                <input type="number" name="bhp_terbayar" id="bhp_terbayar" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- BHP Dibatalkan -->
-                                <label for="bhp_dibatalkan">BHP Dibatalkan:</label>
-                                <input type="number" name="bhp_dibatalkan" id="bhp_dibatalkan" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Denda Tunggakan -->
-                                <label for="denda_tunggakan">BHP Ditunggakan:</label>
-                                <input type="number" name="denda_tunggakan" id="denda_tunggakan" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group mb-2">
-                                <!-- Keterangan -->
-                                <label for="keterangan">Keterangan:</label>
-                                <textarea name="keterangan" id="keterangan" class="form-control"></textarea>    
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- TAMBAH CLIENT BARU -->
+                        <!-- TAMBAH CLIENT BARU -->
                     <div class="col-md-6 col-12">
                         <div class="form-group mb-2">
                             <!-- Form Tambah Client Baru (Tersembunyi) -->
@@ -392,12 +137,269 @@
                             });
                         </script>
 
-                        <!-- Tombol Submit -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Wilayah -->
+                                <label for="wilayah">Wilayah:</label>
+                                <input type="text" name="wilayah" id="wilayah" class="form-control" readonly required>
+                            </div>
                         </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Alamat Client -->
+                                <label for="alamat_client">Alamat Client:</label>
+                                <textarea name="alamat_client" id="alamat_client" class="form-control" readonly required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Client ID -->
+                                <label for="client_id">Client ID:</label>
+                                <input type="text" name="client_id" id="client_id" class="form-control" required readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- App ID -->
+                                <label for="app_id">App ID:</label>
+                                <input type="number" name="app_id" id="app_id" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                 <!-- No Simf -->
+                                <label for="no_simf">No Simf:</label>
+                                <input type="text" name="no_simf" id="no_simf" class="form-control" required readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                 <!-- ID Invoice -->
+                                <label for="id_invoice">ID Invoice:</label>
+                                <input type="number" name="id_invoice" id="id_invoice" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- No SPP -->
+                                <label for="no_spp">No SPP:</label>
+                                <input type="number" name="no_spp" id="no_spp" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Service -->
+                                <label for="service">Service:</label>
+                                <!-- <input type="text" name="service" id="service" class="form-control" readonly> -->
+                                <select name="service" id="service" class="form-control status-dropdown" onchange="ubahWarna()" required>
+                                    <option value="" selected disabled>-- Pilih Service--</option>
+                                    <option value="BROADCAST" class="broadcast">Broadcast</option>
+                                    <option value="FIXED SERVICE" class="fixed service">Fixed Service</option>
+                                    <option value="LAND MOBILE (PRIVATE)" class="land mobile (private)">Land Mobile (Private)</option>
+                                    <option value="LAND MOBILE (PUBLIC)" class="land mobile (public)">Land Mobile (Public)</option>
+                                    <option value="SATELLITE" class="satelite">Satellite</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                 <!-- Batas Bayar (Otomatis Terisi) -->
+                                <label for="batas_bayar">Batas Bayar:</label>
+                                <input type="date" name="batas_bayar" id="batas_bayar" class="form-control" readonly required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Awal Periode BHP -->
+                                <label for="awal_periode_bhp">Awal Periode BHP:</label>
+                                <!-- <input type="text" name="awal_periode_bhp" id="awal_periode_bhp" class="form-control" readonly> -->
+                                <input type="date" name="awal_periode_bhp" id="awal_periode_bhp" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <label for="besar_bhp">Besar BHP:</label>
+                                <input type="number" step="0.0000001" name="besar_bhp" id="besar_bhp" class="form-control" required>
+                                <!-- <input type="text" name="besar_bhp" id="besar_bhp" class="form-control" readonly> -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                            <!-- Tanggal Terbit SPP -->
+                            <label for="terbit_spp">Terbit SPP:</label>
+                            <input type="date" name="terbit_spp" id="terbit_spp" class="form-control" required>
+                            <script>
+                                function hitungBatasBayar() {
+                                    let tanggalTerbitInput = document.getElementById("terbit_spp");
+                                    let batasBayarInput = document.getElementById("batas_bayar");
+                                    let namaClient = document.getElementById("nama_client").value;
+
+                                    if (!tanggalTerbitInput.value) {
+                                        batasBayarInput.value = ""; // Kosongkan batas bayar jika tanggal belum diisi
+                                        return;
+                                    }
+
+                                    let tanggalTerbit = new Date(tanggalTerbitInput.value);
+
+                                    if (!isNaN(tanggalTerbit.getTime())) {
+                                        let tambahanHari = (namaClient === "tambah_baru") ? 30 : 60; 
+                                        tanggalTerbit.setDate(tanggalTerbit.getDate() + tambahanHari);
+
+                                        batasBayarInput.value = tanggalTerbit.toISOString().split("T")[0]; 
+                                    }
+                                }
+
+                                document.getElementById("terbit_spp").addEventListener("change", hitungBatasBayar);
+
+                                document.getElementById("nama_client").addEventListener("change", function() {
+                                    document.getElementById("terbit_spp").value = "";  // Kosongkan Terbit SPP saat client berubah
+                                    document.getElementById("batas_bayar").value = ""; // Kosongkan Batas Bayar juga
+                                });
+                            </script>
+
+                            
+
+                            <script>
+                                document.getElementById("potensi_bhp").addEventListener("input", function() {
+                                    let potensiBhp = parseFloat(this.value); // Ambil nilai input sebagai angka
+
+                                    if (!isNaN(potensiBhp)) {
+                                        let formattedBhp = Number.isInteger(potensiBhp) 
+                                            ? potensiBhp.toString()  // Jika bilangan bulat, tampilkan tanpa desimal
+                                            : potensiBhp.toFixed(7).replace(/\.?0+$/, ""); // Jika ada desimal, hapus nol di belakang
+
+                                        document.getElementById("besar_bhp").value = formattedBhp.replace(".", ","); // Gunakan koma untuk desimal
+                                    } else {
+                                        document.getElementById("besar_bhp").value = 0; // Kosongkan jika input kosong
+                                    }
+                                });
+                            </script>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Tahun Periode -->
+                                <label for="tahun_periode">Tahun Periode:</label>
+                                <select id="tahun_periode" name="tahun_periode" class="form-control" required>
+                                    <option value="" selected disabled>-- Pilih Tahun --</option>
+                                </select>
+
+                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                <script>
+                                $(document).ready(function() {
+                                    let select = $('#tahun_periode');
+
+                                    // Bersihkan isi dropdown biar nggak duplikat
+                                    select.empty();
+
+                                    // Tambahkan opsi default
+                                    select.append('<option value="" selected disabled>-- Pilih Tahun --</option>');
+
+                                    // Tambahkan opsi tahun dengan warna
+                                    for (let i = 1; i <= 10; i++) {
+                                        let option = $('<option>', { value: i, text: i });
+
+                                        // Atur warna khusus untuk angka tertentu
+                                        if (i == 6) {
+                                            option.css('color', 'red'); // Warna merah untuk angka 6
+                                        } else if (i == 10) {
+                                            option.css({ 'color': 'yellow', 'background-color': 'black' }); // Warna kuning dengan latar hitam
+                                        }
+
+                                        select.append(option);
+                                    }
+                                });
+                                </script>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Status Bayar -->
+                                <label for="status_bayar">Status Bayar:</label>
+                                <select name="status_bayar" id="status_bayar" class="form-control status-dropdown" onchange="ubahWarna()" required>
+                                <option value="" selected disabled>-- Pilih Status Bayar--</option>    
+                                    <option value="LUNAS" class="lunas">LUNAS</option>
+                                    <option value="DENDA" class="denda">DENDA</option>
+                                    <option value="TUNGGAK" class="tunggak">TUNGGAK</option>
+                                    <option value="BATAL" class="batal">BATAL</option>
+                                    <option value="BELUM" class="belum">BELUM BAYAR</option>
+                                    <option value="KURANG" class="kurang">KURANG BAYAR</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Status ISR -->
+                                <label for="status_isr">Status ISR:</label> <!-- ID & name diperbaiki -->
+                                <select name="status_isr" id="status_isr" class="form-control status-dropdown" onchange="ubahWarna()" required>
+                                    <option value="" selected disabled>-- Pilih Status ISR --</option>
+                                    <option value="VALID" class="lunas">VALID</option>
+                                    <option value="BATAL" class="batal">BATAL</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Tanggal Pembayaran -->
+                                <label for="tgl_pembayaran">Tanggal Pembayaran:</label>
+                                <input type="date" name="tgl_pembayaran" id="tgl_pembayaran" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- BHP Terbayar -->
+                                <label for="bhp_terbayar">BHP terbayar:</label>
+                                <input type="number" name="bhp_terbayar" id="bhp_terbayar" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- BHP Dibatalkan -->
+                                <label for="bhp_dibatalkan">BHP Dibatalkan:</label>
+                                <input type="number" name="bhp_dibatalkan" id="bhp_dibatalkan" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Denda Tunggakan -->
+                                <label for="denda_tunggakan">BHP Ditunggakan:</label>
+                                <input type="number" name="denda_tunggakan" id="denda_tunggakan" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group mb-2">
+                                <!-- Keterangan -->
+                                <label for="keterangan">Keterangan:</label>
+                                <textarea name="keterangan" id="keterangan" class="form-control"></textarea>    
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Submit -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                    </div>
                    
                     <script>
                             document.getElementById("nama_client").addEventListener("change", function() {

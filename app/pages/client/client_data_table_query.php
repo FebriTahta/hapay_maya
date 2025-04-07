@@ -62,12 +62,28 @@ try {
     // Tambahkan tombol action ke setiap baris
     foreach ($dataTableClient as &$row) {
         $row['action'] = '
-            <a href="index.php?page=client-edit&id='.$row['id'].'" data-id="'.$row['id'].'" class="edit-btn btn btn-sm btn-primary" style="width:100px; margin-bottom:5px" data-id="'.$row['id'].'"> 
+            <a href="index.php?page=client-edit&id='.$row['id'].'" class="edit-btn btn btn-sm btn-primary" style="width:100px; margin-bottom:5px"> 
                 <i class="fa fa-edit"></i> Edit
             </a>
             <button class="delete-btn btn btn-sm btn-danger" style="width:100px; margin-bottom:5px" data-id="'.$row['id'].'">
                 <i class="fa fa-trash"></i> Delete
             </button>
+        ';
+
+        $class = ($row['status_bayar'] === 'LUNAS') ? 'btn-success' : (
+            ($row['status_bayar'] === 'DENDA') ? 'btn-danger' : (
+                ($row['status_bayar'] === 'TUNGGAK') ? 'btn-primary' : (
+                    ($row['status_bayar'] === 'BATAL') ? 'btn-secondary' : 'btn-light'
+                )
+            )
+        );
+
+        $row['akses_status_bayar'] = '
+            <a href="index.php?page=status-tagihan&client_id='.$row['client_id'].'"
+            class="btn btn-sm '.$class.'"
+                style="width:100px; margin-bottom:5px"> 
+                '.$row['status_bayar'].'
+            </a>
         ';
     }
 

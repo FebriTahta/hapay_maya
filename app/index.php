@@ -47,6 +47,9 @@ include('header.php');?>
       else if($_GET['page']=='client-edit'){
           include('app/../pages/client/client_edit_form.php');
       }
+      else if($_GET['page']=='status-tagihan'){
+        include('app/../pages/status_tagihan/status_tagihan.php');
+    }
       else if($_GET['page']=='data-pembayaran'){
         include('data_pembayaran.php');
       }
@@ -54,7 +57,7 @@ include('header.php');?>
         include('data.php');
       }
       else{
-        echo 'page tidak ditemukan';
+        include('data_pembayaran.php');
       }
     }
     else{

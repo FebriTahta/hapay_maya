@@ -15,12 +15,7 @@
                     console.error("Response infoDataClient is not an array:", response);
                     return; // Hentikan eksekusi jika tidak sesuai format
                 }
-
-                // if (!response || !Array.isArray(tableDataClient)) {
-                //     console.error("Response tableDataClient is not an array:", response);
-                //     return; // Hentikan eksekusi jika tidak sesuai format
-                // }
-
+                
                 const arr = [];
                 const arr_val = [];                
             
@@ -55,6 +50,12 @@
                     } else if (status === 'BATAL') {
                         display_icon = '<i class="fas fa-times-circle"></i>';
                         background_icon = 'bg-secondary'
+                    }else if (status === 'BELUM') {
+                        display_icon = '<i class="fas fa-times-circle"></i>';
+                        background_icon = 'bg-secondary'
+                    }else if (status === 'KURANG') {
+                        display_icon = '<i class="fas fa-times-circle"></i>';
+                        background_icon = 'bg-danger'
                     } else {
                         display_icon = '<i class="fas fa-question-circle"></i>'; // Default icon      
                         background_icon = 'bg-secondary'                  
@@ -120,7 +121,7 @@
                         { "data": "potensi_bhp" },
                         { "data": "besar_bhp" },
                         { "data": "tahun_periode" },
-                        { "data": "status_bayar" },
+                        { "data": "akses_status_bayar" },
                         { "data": "status_isr" },
                         { "data": "tgl_pembayaran" },
                         { "data": "bhp_terbayar" },
