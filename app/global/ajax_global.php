@@ -1,5 +1,7 @@
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+
+    function queryGlobal()
+    {
         $.ajax({
             url: "app/../global/query_global.php",
             type: 'GET',
@@ -26,5 +28,49 @@
                 console.error("Error mengambil data tahun:", error);
             }
         });
+    }
+
+    function queryNotif()
+    {
+        $.ajax({
+            url: "app/../global/notification_query.php",
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                const notif = response.data;
+                const counter = response.data2;
+                
+                $('.counter_notif').html(counter);
+                $.each(notif, function(index, item) {
+                    let bg_color = ''; // pakai let, bukan const
+
+                    if (item.baca == 0) {
+                        bg_color = 'background-color: #d6d6d6;';
+                    }
+
+                    if (item.baca == 0) {
+                        bg_color = 'background-color: #d6d6d6;'
+                    }
+                    
+                    
+                    $('#notif_view').append(
+                        '<div class="dropdown-divider"></div>' +
+                        '<a href="#" class="dropdown-item" style="max-width: 100%; white-space: normal; word-wrap: break-word; '+bg_color+'">' +
+                            '<i class="fas fa-envelope mr-2"></i> ' +
+                            ''+item.text+'' +
+                        '</a>' +
+                        '<div class="dropdown-divider"></div>'
+                    );
+                });
+            },
+            error: function(error) {
+                console.error("error");
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        queryGlobal();    
+        queryNotif();
     });
 </script>
