@@ -103,6 +103,10 @@
                 $('#data_table_client').DataTable({
                     "processing": true,
                     "serverSide": false,
+                    "dom": 'Bfrtip', // penting untuk menampilkan tombol
+                    "buttons": [
+                        "copy", "csv", "excel", "pdf", "print", "colvis" // tombol download CSV
+                    ],
                     "data": data, // Pastikan data dimasukkan di sini
                     "columns": [
                         { "data": "id" },

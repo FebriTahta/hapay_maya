@@ -61,6 +61,7 @@ try {
 
     // Tambahkan tombol action ke setiap baris
     foreach ($dataTableClient as &$row) {
+        // tombol action
         $row['action'] = '
             <a href="index.php?page=client-edit&id='.$row['id'].'" class="edit-btn btn btn-sm btn-primary" style="width:100px; margin-bottom:5px"> 
                 <i class="fa fa-edit"></i> Edit
@@ -70,6 +71,7 @@ try {
             </button>
         ';
 
+        // logic pewarnaan status bayar
         $class = ($row['status_bayar'] === 'LUNAS') ? 'btn-success' : (
             ($row['status_bayar'] === 'DENDA') ? 'btn-danger' : (
                 ($row['status_bayar'] === 'TUNGGAK') ? 'btn-primary' : (
@@ -78,6 +80,7 @@ try {
             )
         );
 
+        // status bayar
         $row['akses_status_bayar'] = '
             <a href="index.php?page=status-tagihan&client_id='.$row['client_id'].'&status_bayar='.$row['status_bayar'].'&id='.$row['id'].'"
             class="btn btn-sm '.$class.'"
@@ -85,6 +88,22 @@ try {
                 '.$row['status_bayar'].'
             </a>
         ';
+
+        // normalisasi app_id dari import csv
+        $row['app_id'] = number_format((float)$row['app_id'],0,'','');
+
+        // format tanggal
+        $row['terbit_spp'] =  date("j F Y", strtotime($row['terbit_spp']));
+        $row['batas_bayar'] = date("j F Y", strtotime($row['batas_bayar']));
+        $row['awal_periode_bhp'] = date("j F Y", strtotime($row['awal_periode_bhp']));
+
+        // format number untuk nominal
+        $row['potensi_bhp'] = 'Rp '.number_format((float)$row['potensi_bhp']);
+        $row['besar_bhp'] = 'Rp '.number_format((float)$row['besar_bhp']);
+        $row['bhp_terbayar'] = 'Rp '.number_format((float)$row['bhp_terbayar']);
+        $row['denda_tunggakan'] = 'Rp '.number_format((float)$row['denda_tunggakan']);
+        $row['bhp_dibatalkan'] = 'Rp '.number_format((float)$row['bhp_dibatalkan']);
+
     }
 
     // Jika data kosong, kirimkan respons kosong

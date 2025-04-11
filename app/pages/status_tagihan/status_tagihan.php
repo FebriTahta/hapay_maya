@@ -12,9 +12,6 @@
                         <div class="col-8 items-left text-left row">
                             <div class="ml-2">
                                 <div class="row">
-                                    <div class="col-6 text-left">
-                                        <h5 class="text-uppercase" style="font-size: 18px;">Client : </h5>
-                                    </div>
                                     <div class="col-6 text-right" id="status_wrapper">
                                         <?php
                                             $statusBadgeMap = [

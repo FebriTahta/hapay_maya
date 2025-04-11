@@ -21,6 +21,10 @@
                     "processing": true,
                     "serverSide": false,
                     "pageLength": 5, // ✅ Tampilkan 5 row per halaman
+                    "dom": 'Bfrtip', // penting untuk menampilkan tombol
+                    "buttons": [
+                        "copy", "csv", "excel", "pdf", "print", "colvis" // tombol download CSV
+                    ],
                     "data": data, // Pastikan data dimasukkan di sini
                     "columns": [
                         { 
