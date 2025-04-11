@@ -55,6 +55,11 @@ if (isset($_GET['client_id'])) {
             $dataTableTagihanClient[] = $row;
         }
 
+        // Format kolom tagihan setelah semua data masuk
+        foreach ($dataTableTagihanClient as &$row) {
+            $row['tagihan'] = 'Rp ' . number_format((float)$row['tagihan'], 0, ',', '.');
+        }
+
         echo json_encode(["data" => $dataTableTagihanClient]);
 
     } catch (\Throwable $th) {
