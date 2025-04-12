@@ -106,7 +106,7 @@ try {
 
         $color = ($row['tahun_periode'] < 6) ? 'badge badge-success' : (
             ($row['tahun_periode'] == 6) ? 'badge badge-danger' : (
-                ($row['tahun_periode'] > 6) ? 'badge badge-warning' : ('badge badge-primary')
+                ($row['tahun_periode'] == 10) ? 'badge badge-warning' : ('badge badge-primary')
             )
         );
         // warna tahun

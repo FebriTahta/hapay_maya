@@ -19,6 +19,26 @@ if (isset($_GET['id'])) {
     $query = "select * from db_client dc  where  dc.id = ?";
 
     try {
+
+        if (isset($_GET['notif_id'])) {
+            $notif_id = intval($_GET['notif_id']); // pastikan integer
+        
+            // Cek apakah notif dengan id tersebut ada dan belum dibaca
+            $checkQuery = "SELECT 1 FROM db_notif WHERE id = ? AND baca != 1 LIMIT 1";
+            $checkStmt = mysqli_prepare($koneksi, $checkQuery);
+            mysqli_stmt_bind_param($checkStmt, "i", $notif_id);
+            mysqli_stmt_execute($checkStmt);
+            $checkResult = mysqli_stmt_get_result($checkStmt);
+        
+            if (mysqli_num_rows($checkResult) > 0) {
+                // Jika ada, update baca = 1
+                $updateQuery = "UPDATE db_notif SET baca = 1 WHERE id = ?";
+                $updateStmt = mysqli_prepare($koneksi, $updateQuery);
+                mysqli_stmt_bind_param($updateStmt, "i", $notif_id);
+                mysqli_stmt_execute($updateStmt);
+            }
+        }        
+        
         $stmt = mysqli_prepare($koneksi, $query);
         mysqli_stmt_bind_param($stmt, "s", $id);
         mysqli_stmt_execute($stmt);

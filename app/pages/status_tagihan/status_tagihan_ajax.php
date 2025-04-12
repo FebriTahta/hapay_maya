@@ -12,9 +12,9 @@
                 
                 
                 // Hancurkan DataTable jika sudah ada
-                if ($.fn.DataTable.isDataTable('#data_tagihan_client')) {
+                // if ($.fn.DataTable.isDataTable('#data_tagihan_client')) {
                     $('#data_tagihan_client').DataTable().destroy();
-                }
+                // }
 
                 // Inisialisasi ulang DataTable dengan data baru
                 $('#data_tagihan_client').DataTable({
@@ -50,12 +50,12 @@
         });
     }
 
-    function loadDetailClient(id)
+    function loadDetailClient(id, notif_id)
     {
         $.ajax({
             url: "app/../pages/status_tagihan/status_tagihan_detail_client_query.php",
             type: 'GET',
-            data: {id: id},
+            data: {id: id, notif_id: notif_id},
             dataType: 'json',
             success: function(response) {
                 const data = response.data[0];
@@ -89,6 +89,7 @@
                 $('#batas_bayar_surat').val(convertToDisplayDateFormat(data.batas_bayar));
                 $('#id_client').val(data.id);
                 
+                queryNotif();
             },
             error: function(xhr, status, error) {
                 console.error("Error mengambil data:", error);
@@ -139,9 +140,10 @@
     document.addEventListener("DOMContentLoaded", function() {
         const client_id = $('#client_id_text').val();
         const id = $('#id').val();
+        const notif_id = $('#notif_id').val();
         console.log(id);
         
         loadDataTableClient(client_id);
-        loadDetailClient(id)
+        loadDetailClient(id, notif_id)
     });
 </script>

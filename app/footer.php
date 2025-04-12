@@ -6,6 +6,45 @@
     </div>
   </footer>
 
+  <!-- modal -->
+  <div class="modal fade" id="modal_notif" tabindex="-1" role="dialog" aria-labelledby="modalNotifLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-body" style="font-size: 14px">
+                <p id="text"></p>
+                <p>
+                  Kami mengingatkan bahwa Anda telah memasuki periode ke-<span id="periode"></span> dan wajib melakukan pembayaran BHP ISR sesuai ketentuan yang berlaku.
+                </p>
+                <ol>
+                  <li>
+                    Jika tanggal jatuh tempo pembayaran bertepatan dengan hari libur, maka batas akhir pembayaran adalah satu (1) hari sebelum hari libur tersebut.
+                  </li>
+                  <li>
+                    Jika Anda sudah tidak menggunakan frekuensi, harap segera mengajukan permohonan pengakhiran ISR melalui Spectraweb paling lambat pada saat jatuh tempo, agar tagihan tidak menjadi Piutang Negara.
+                  </li>
+                  <li>
+                    Jika Anda telah melunasi tagihan ini, mohon abaikan pesan ini.
+                  </li>
+                </ol>
+              </div>
+              <div class="modal-footer">
+                  <div class="row">
+                      <div class="col-6 text-center">
+                          <button class="btn btn-secondary" style="font-size: 14px; width: 150px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              CLOSE
+                          </button>
+                      </div>
+                      <div class="col-6 text-center">
+                          <a href="#" id="link" class="btn btn-primary" style="font-size: 14px; width: 150px;">
+                              BUAT TAGIHAN
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

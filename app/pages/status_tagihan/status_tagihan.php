@@ -117,6 +117,7 @@
                         </div>
                         <input type="hidden" id="client_id_text" value="<?php echo $_GET['client_id']?>" class="form-control">
                         <input type="hidden" id="id" value="<?php echo $_GET['id']?>" class="form-control">
+                        <input type="hidden" id="notif_id" value="<?php echo $_GET['notif_id']?>" class="form-control">
                     </div>
                 </div>
                 <div class="card-body table-responsive">

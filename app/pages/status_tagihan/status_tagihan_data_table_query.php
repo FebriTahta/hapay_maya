@@ -19,29 +19,18 @@ if (isset($_GET['client_id'])) {
     $query = "
         SELECT 
             dt.id AS id_tagihan_client,
-            dc.client_id, 
-            dc.nama_client, 
+            dt.client_id, 
+            dt.nama_client, 
             dt.id_invoice_surat, 
             dt.no_tagihan, 
             dt.terbit_surat,
             dt.batas_bayar_surat,
             dt.tagihan,
-            dt.status_bayar_surat,
-            dc.status_bayar
+            dt.status_bayar_surat
         FROM 
-            db_tagihan dt
-        LEFT JOIN db_client dc ON dc.client_id = dt.client_id 
-        WHERE 
-            dc.status_bayar IS NOT NULL
-            AND dt.id_invoice_surat IS NOT NULL
-            AND dt.no_tagihan IS NOT NULL
-            AND dt.terbit_surat IS NOT NULL
-            AND dt.batas_bayar_surat IS NOT NULL
-            AND dt.tagihan IS NOT NULL
-            AND dt.status_bayar_surat IS NOT NULL
-            AND dc.awal_periode_bhp REGEXP '^[0-9]{2}/[0-9]{2}/[0-9]{4}$'
-            AND dc.client_id = ?
-        ORDER BY dc.id DESC
+            db_tagihan dt 
+        WHERE dt.client_id = ?
+        ORDER BY dt.id DESC;
     ";
 
     try {

@@ -40,19 +40,7 @@
                 const notif = response.data;
                 const counter = response.data2;
 
-                if (counter == 0) {
-                    $('#notif_view').empty(); // Menghapus semua isi sebelumnya
-                    $('#notif_view').append(
-                        '<div class="dropdown-divider"></div>' +
-                        '<a href="#" class="dropdown-item" style="font-size:14px;color: red; max-width: 100%; white-space: normal; word-wrap: break-word;">' +
-                            '<i class="fas fa-envelope mr-2"></i> ' +
-                            'belum ada notifikasi' +
-                        '</a>' +
-                        '<div class="dropdown-divider"></div>'
-                    );
-                }else{
-                    $('#notif_view').empty(); // Menghapus semua isi sebelumnya
-                }
+                $('#notif_view').empty(); // Menghapus semua isi sebelumnya
                 
                 $('.counter_notif').html(counter);
                 $.each(notif, function(index, item) {
@@ -62,16 +50,27 @@
                         bg_color = 'background-color: #d6d6d6;';
                     }
                     
+                    // Gunakan data attributes
                     $('#notif_view').append(
                         '<div class="dropdown-divider"></div>' +
-                        '<a href="#" class="dropdown-item" style="font-size: 14px;max-width: 100%; white-space: normal; word-wrap: break-word; '+bg_color+'">' +
-                            '<i class="fas fa-envelope mr-2"></i> ' +
-                            ''+item.text+'' +
+                        '<a href="#" data-toggle="modal" data-target="#modal_notif" class="dropdown-item" ' +
+                        'data-link="index.php?page=status-tagihan&client_id='+item.client_id+'&id='+item.id_client+'&notif_id='+item.id+'" data-text="'+item.text+'" data-periode="'+item.periode+'" ' +
+                        'style="font-size: 14px; max-width: 100%; white-space: normal; word-wrap: break-word; '+bg_color+'">' +
+                            '<i class="fas fa-envelope mr-2"></i> ' + item.text +
                         '</a>' +
                         '<div class="dropdown-divider"></div>'
                     );
-                    
-                    
+                });
+
+                // Event listener satu kali di luar loop
+                $('#notif_view').on('click', '.dropdown-item', function () {
+                    const notifText = $(this).data('text');
+                    const notifPeriode = $(this).data('periode');
+                    const notifLink = $(this).data('link');
+
+                    $('#modal_notif .modal-body #text').text(notifText);
+                    $('#modal_notif .modal-body #periode').text(notifPeriode);
+                    $('#modal_notif #link').attr('href', notifLink);
                 });
             },
             error: function(error) {

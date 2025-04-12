@@ -121,13 +121,13 @@
         if ($stmt->affected_rows > 0) {
             if ((int)$_POST['tahun_periode'] === 6 || (int)$_POST['tahun_periode'] === 10) {
                 // Insert ke tabel notif
-                $notifQuery = "INSERT INTO db_notif (client_id, text, baca, created_at) VALUES (?,?,?,NOW())";
+                $notifQuery = "INSERT INTO db_notif (client_id, id_client, text, periode, baca, created_at) VALUES (?,?,?,?,?,NOW())";
                 $notifStmt = $koneksi->prepare($notifQuery);
                 
                 $text = "Peringatan pembayaran ISR - Periode ke-".$_POST['tahun_periode'].' - '.$client;
                 $baca = 0; // unread
         
-                $notifStmt->bind_param("isi",$_POST['client_id'], $text, $baca);
+                $notifStmt->bind_param("iisii",$_POST['client_id'], $new_id, $text, $_POST['tahun_periode'], $baca);
                 $notifStmt->execute();
             }
             echo json_encode(["success" => true, "message" => "Data inserted successfully."]);
