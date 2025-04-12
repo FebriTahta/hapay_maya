@@ -8,7 +8,7 @@
             success: function(response) {
 
                 const data = response.data;
-                console.log(response);
+                // console.log(response);
                 
                 
                 // Hancurkan DataTable jika sudah ada
@@ -59,7 +59,22 @@
             dataType: 'json',
             success: function(response) {
                 const data = response.data[0];
-                console.log(data);
+                // console.log(data);
+                const statusBadgeMap = {
+                    'LUNAS': 'badge-success',
+                    'TUNGGAK': 'badge-danger',
+                    'BELUM': 'badge-warning',
+                    'BATAL': 'badge-secondary',
+                    'KURANG': 'badge-info',
+                    'DENDA': 'badge-danger'
+                };
+
+                const classBadge = statusBadgeMap[data['status_bayar']] || 'badge-light';
+                
+                $('#status_wrapper').append(
+                    '<p style="font-size: 16px;" class="badge '+classBadge+'">'+data['status_bayar']+'</p>'
+                );
+
                 $('#nama_client_text').text(data.nama_client);
                 $('#besar_bhp_text').text('Rp '+data.besar_bhp.toLocaleString());
                 $('#batas_bayar_text').text(data.batas_bayar);

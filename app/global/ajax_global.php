@@ -39,28 +39,39 @@
             success: function(response) {
                 const notif = response.data;
                 const counter = response.data2;
+
+                if (counter == 0) {
+                    $('#notif_view').empty(); // Menghapus semua isi sebelumnya
+                    $('#notif_view').append(
+                        '<div class="dropdown-divider"></div>' +
+                        '<a href="#" class="dropdown-item" style="font-size:14px;color: red; max-width: 100%; white-space: normal; word-wrap: break-word;">' +
+                            '<i class="fas fa-envelope mr-2"></i> ' +
+                            'belum ada notifikasi' +
+                        '</a>' +
+                        '<div class="dropdown-divider"></div>'
+                    );
+                }else{
+                    $('#notif_view').empty(); // Menghapus semua isi sebelumnya
+                }
                 
                 $('.counter_notif').html(counter);
                 $.each(notif, function(index, item) {
                     let bg_color = ''; // pakai let, bukan const
 
-                    if (item.baca == 0) {
+                    if (item.baca == 1) {
                         bg_color = 'background-color: #d6d6d6;';
                     }
-
-                    if (item.baca == 0) {
-                        bg_color = 'background-color: #d6d6d6;'
-                    }
-                    
                     
                     $('#notif_view').append(
                         '<div class="dropdown-divider"></div>' +
-                        '<a href="#" class="dropdown-item" style="max-width: 100%; white-space: normal; word-wrap: break-word; '+bg_color+'">' +
+                        '<a href="#" class="dropdown-item" style="font-size: 14px;max-width: 100%; white-space: normal; word-wrap: break-word; '+bg_color+'">' +
                             '<i class="fas fa-envelope mr-2"></i> ' +
                             ''+item.text+'' +
                         '</a>' +
                         '<div class="dropdown-divider"></div>'
                     );
+                    
+                    
                 });
             },
             error: function(error) {

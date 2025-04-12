@@ -13,28 +13,7 @@
                             <div class="ml-2">
                                 <div class="row">
                                     <div class="col-6 text-right" id="status_wrapper">
-                                        <?php
-                                            $statusBadgeMap = [
-                                                'LUNAS'   => 'badge-success',
-                                                'TUNGGAK' => 'badge-danger',
-                                                'BELUM'   => 'badge-warning',
-                                                'BATAL'   => 'badge-secondary',
-                                                'KURANG'  => 'badge-info',
-                                                'DENDA'   => 'badge-danger'
-                                            ];
-                                            $status_bayar = $_GET['status_bayar'] ?? '';
-                                            $classBadge = $statusBadgeMap[$status_bayar] ?? 'badge-light';
-
-                                            $status = '';
-                                            if ($status_bayar == 'BELUM') {
-                                                $status = 'BELUM BAYAR';
-                                            }elseif ($status_bayar == 'KURANG') {
-                                                $status = 'KURANG BAYAR';
-                                            }else{
-                                                $status = $status_bayar;
-                                            }
-                                        ?>
-                                        <p style="font-size: 16px;" class="badge <?= $classBadge?>"><?= htmlspecialchars($status)?></p>
+                                        <!-- status -->
                                     </div>
                                 </div>
                                 

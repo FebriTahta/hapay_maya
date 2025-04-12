@@ -157,6 +157,8 @@
                     $('#modal_add_client').modal('hide');
                     loadDataTableClient(); // Reload DataTable setelah menyimpan data
                     loadStatus(); // reload info status
+
+                    queryNotif(); // load notif pada global folder
                 } else {
                     // alert("Gagal menyimpan data: " + response.error);
                     toastr.warning(response.message);
