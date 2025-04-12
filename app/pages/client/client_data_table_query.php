@@ -104,6 +104,16 @@ try {
         $row['denda_tunggakan'] = 'Rp '.number_format((float)$row['denda_tunggakan']);
         $row['bhp_dibatalkan'] = 'Rp '.number_format((float)$row['bhp_dibatalkan']);
 
+        $color = ($row['tahun_periode'] < 6) ? 'badge badge-success' : (
+            ($row['tahun_periode'] == 6) ? 'badge badge-danger' : (
+                ($row['tahun_periode'] > 6) ? 'badge badge-warning' : ('badge badge-primary')
+            )
+        );
+        // warna tahun
+        $row['tahun_periode'] = '
+            <p class="'.$color.'">'.$row['tahun_periode'].'</p>
+        ';
+
     }
 
     // Jika data kosong, kirimkan respons kosong
