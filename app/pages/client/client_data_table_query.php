@@ -96,6 +96,7 @@ try {
         $row['terbit_spp'] =  date("j F Y", strtotime($row['terbit_spp']));
         $row['batas_bayar'] = date("j F Y", strtotime($row['batas_bayar']));
         $row['awal_periode_bhp'] = date("j F Y", strtotime($row['awal_periode_bhp']));
+        $row['tgl_pembayaran'] = date("j F Y", strtotime($row['awal_periode_bhp']));
 
         // format number untuk nominal
         $row['potensi_bhp'] = 'Rp '.number_format((float)$row['potensi_bhp']);
