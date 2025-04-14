@@ -223,6 +223,7 @@
                             Swal.fire('Terhapus!', 'Data berhasil dihapus.', 'success');
                             loadDataTableClient();
                             loadStatus();
+                            queryNotif(); // load notif pada global folder
                         } else {
                             Swal.fire('Gagal!', response.message || 'Terjadi kesalahan.', 'error');
                         }
