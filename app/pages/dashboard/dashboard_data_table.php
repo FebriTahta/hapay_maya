@@ -56,7 +56,7 @@
             });
         }
 
-        loadTable();
+        loadTable('');
 
         document.getElementById("tahun").addEventListener("change", function() {
             console.log("FILTER TABEL:", this.value); // Debugging

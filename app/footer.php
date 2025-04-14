@@ -143,7 +143,7 @@
     });
   });
   $(document).ready(function(){
-    setInterbal(function(){
+    setInterval(function(){
       $('report-client').load("banner.php");
     })
   })
