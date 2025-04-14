@@ -102,6 +102,7 @@
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-sm btn-primary">SIMPAN</button>
+                                <a href="index.php?page=client" class="btn btn-sm btn-secondary">KEMBALI</a>
                             </div>
                         </div>
                     </form>
