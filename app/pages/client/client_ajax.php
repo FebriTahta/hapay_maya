@@ -108,6 +108,10 @@
                         "copy", "csv", "excel", "pdf", "print", "colvis" // tombol download CSV
                     ],
                     "data": data, // Pastikan data dimasukkan di sini
+                    "scrollY": "500px",            // tinggi maksimal table
+                    "scrollCollapse": true,
+                    "paging": true,
+                    "fixedHeader": true,           // aktifkan fixed header
                     "columns": [
                         { "data": "id" },
                         { "data": "wilayah" },
